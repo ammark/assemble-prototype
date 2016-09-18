@@ -6,27 +6,37 @@
 
 import React, { Component } from 'react';
 import {
-  AppRegistry,
-  StyleSheet,
-  Text,
-  View
+    AppRegistry,
+    StyleSheet,
+    Text,
+    View,
+    Navigator
 } from 'react-native';
+
+import Landing from './application/components/Landing';
+import Dashboard from './application/components/Dashboard';
+import { globals } from './application/styles';
+
 
 class assemblies extends Component {
   render() {
     return (
-      <View style={styles.container}>
-        <Text style={styles.welcome}>
-          Welcome to React Native!
-        </Text>
-        <Text style={styles.instructions}>
-          To get started, edit index.ios.js
-        </Text>
-        <Text style={styles.instructions}>
-          Press Cmd+R to reload,{'\n'}
-          Cmd+D or shake for dev menu
-        </Text>
-      </View>
+        <Navigator
+            style={globals.flex}
+            initialRoute={{name: 'Landing'}}
+            renderScene={(route, navigator) => {
+                switch (route.name) {
+                    case 'Landing':
+                        return (
+                            <Landing navigator={navigator}/>
+                        );
+                    case 'Dashboard':
+                        return (
+                            <Dashboard navigator={navigator}/>
+                        );
+                }
+            }}
+        />
     );
   }
 }
